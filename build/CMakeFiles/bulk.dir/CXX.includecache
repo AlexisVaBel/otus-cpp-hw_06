@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lebllex/workspace/cpp/otus/hw_06/main.cpp
+iostream
+-
+observer/bulkobserver.h
+/home/lebllex/workspace/cpp/otus/hw_06/observer/bulkobserver.h
+processor/cmdacceptor.h
+/home/lebllex/workspace/cpp/otus/hw_06/processor/cmdacceptor.h
+
+/home/lebllex/workspace/cpp/otus/hw_06/observer/bulkobserver.h
+set
+-
+vector
+-
+memory
+-
+
+/home/lebllex/workspace/cpp/otus/hw_06/processor/cmdacceptor.h
+vector
+-
+stack
+-
+string
+-
+iostream
+-
+

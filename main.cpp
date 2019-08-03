@@ -1,19 +1,15 @@
 #include <iostream>
 #include "observer/bulkobserver.h"
-
+#include "processor/cmdacceptor.h"
 
 int main(int argc, char ** argv){
     std::cout << __PRETTY_FUNCTION__ << std::endl;
+    CmdAcceptor acc(3);
     for(std::string line; std::getline(std::cin, line);){
-        std::cout << line << " : " << std::endl;
+        if(acc.procsCmd(line)) acc.printQueue();
     }
+    acc.printQueue();
 
-//    BulkObserver<int> bulk;
-//    IntIpVectorsT r;
-//        for(std::string line; std::getline(std::cin, line);){
-//            std::vector<std::string> v = split(line, '\t');
-//            r.push_back(splitToInts(v.at(0), '.'));
-//        }
 
     return 0;
 }

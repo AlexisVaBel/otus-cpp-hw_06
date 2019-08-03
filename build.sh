@@ -2,7 +2,7 @@ mkdir ./build
 cd ./build
 cmake ..
 make -j4
-doxygen ../doc/Doxyfile
+#doxygen ../doc/Doxyfile
 ./bulk
 #ltrace -e malloc -e free ./bulk > /dev/null
 #valgrind --tool=memcheck ./bulk
