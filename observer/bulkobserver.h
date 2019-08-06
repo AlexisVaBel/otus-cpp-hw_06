@@ -4,26 +4,26 @@
 #include <vector>
 #include <memory>
 
-
+// observer implementation got here
 //SOURCE http://itnotesblog.ru/note.php?id=144
-template <typename T>
+template <typename Observer>
 class BulkObserver{
 public:
-    virtual ~BulkObserver();
+    ~BulkObserver(){}
 
-    void registerObserver(std::unique_ptr<BulkObserver> arg){
+    void registerObserver(Observer* arg){
         if(m_iCount == 0){
             m_obervers.insert(arg);
         }else{
-            m_requests.push_back( ObserverRequest {&BulkObserver<T>::registerObserver,arg});
+            m_requests.push_back( ObserverRequest {&BulkObserver<Observer>::registerObserver,arg});
         }
     }
 
-    void unRegisterObserver(std::unique_ptr<BulkObserver> arg){
+    void unRegisterObserver(Observer* arg){
         if(m_iCount == 0){
             m_obervers.erase(arg);
         }else{
-            m_requests.push_back( ObserverRequest {&BulkObserver<T>::unRegisterObserver,arg});
+            m_requests.push_back( ObserverRequest {&BulkObserver<Observer>::unRegisterObserver,arg});
         }
     }
 
@@ -31,15 +31,16 @@ protected:
     BulkObserver():m_iCount(0){
     }
 
-    void notifyObservers(){
+    template <typename F, typename ... Args>
+    void notifyObservers(F f, Args ... args){
         ++ m_iCount;
-        for (auto obs: m_obervers) {
-
+        for (Observer *obs: m_obervers) {
+            (obs->*f)(args ...);
         }
         -- m_iCount;
         if( m_iCount == 0 ) {
             for( const ObserverRequest& r : m_requests ) {
-                ( this->*r.operation )( r.BulkObserver );
+                ( this->*r.operation )( r.m_observer );
             };
             m_requests.clear();
         }
@@ -48,14 +49,14 @@ protected:
 private:
 
     struct ObserverRequest{
-        void (BulkObserver<T>::*operation )(std::unique_ptr<BulkObserver>);
-        std::unique_ptr<BulkObserver> m_observer;
+        void (BulkObserver<Observer>::*operation )(Observer*);
+        Observer *m_observer;
     };
 
 
     int m_iCount;   // protector
 
-    std::set< std::unique_ptr<BulkObserver> > m_obervers;
+    std::set< Observer*> m_obervers;
     std::vector< ObserverRequest > m_requests;
 };
 #endif // BULKOBSERVER_H

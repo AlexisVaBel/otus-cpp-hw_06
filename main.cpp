@@ -1,15 +1,24 @@
 #include <iostream>
-#include "observer/bulkobserver.h"
-#include "processor/cmdacceptor.h"
+
+#include <string>
+#include <processor/bulkmonitor.h>
+#include <processor/consolecmdobserver.h>
+#include <processor/logcmdobserver.h>
+
+#include <memory>
 
 int main(int argc, char ** argv){
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
-    CmdAcceptor acc(3);
-    for(std::string line; std::getline(std::cin, line);){
-        if(acc.procsCmd(line)) acc.printQueue();
-    }
-    acc.printQueue();
+    if(argc < 2) throw  std::length_error("need at least one parameter to work");
+    int val = std::stoi(argv[1]);
 
+    BulkMonitor monitor(val);
+
+    ConsoleCmdObserver *v1 = new ConsoleCmdObserver();
+    LogCmdObserver     *v2 = new LogCmdObserver();
+
+    monitor.registerObserver(v1);
+    monitor.registerObserver(v2);
+    monitor.procsCmd();
 
     return 0;
 }
