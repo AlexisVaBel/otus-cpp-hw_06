@@ -8,8 +8,6 @@
 
 
 class LogCmdObserver:public ICmdObserver{
-
-
     // ICmdObserver interface
 public:
     void onCmdReceived(std::vector<std::string> &vct_str)

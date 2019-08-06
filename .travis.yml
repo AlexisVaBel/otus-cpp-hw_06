@@ -4,7 +4,7 @@
  env:
    global:
      - DOXYFILE: $TRAVIS_BUILD_DIR/doc/Doxyfile
-     - GH_REPO_REF: github.com/AlexisVaBel/otus-cpp-hw_04.git
+     - GH_REPO_REF: github.com/AlexisVaBel/otus-cpp-hw_06.git
 
  before_script:
          - sudo apt update
@@ -28,7 +28,7 @@
          - provider: script
            skip_cleanup: true
            script:
-             - curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -ualexisvabel:$BINTRAY_API_KEY "https://api.bintray.com/content/alexisvabel/otus-cpp/homework/$TRAVIS_BUILD_NUMBER/home/travis/build/AlexisVaBel/otus-cpp-hw_04/print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=amd64;publish=1"
+             - curl -T bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -ualexisvabel:$BINTRAY_API_KEY "https://api.bintray.com/content/alexisvabel/otus-cpp/homework/$TRAVIS_BUILD_NUMBER/home/travis/build/AlexisVaBel/otus-cpp-hw_06/bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=amd64;publish=1"
 
 
 

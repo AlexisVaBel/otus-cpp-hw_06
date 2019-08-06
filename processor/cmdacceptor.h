@@ -7,6 +7,8 @@
 #include <iostream>
 
 
+// better way to use ICmdAcceptor and CmdBulkAcceptor as implementation
+
 class CmdAcceptor{
 public:
     CmdAcceptor(uint cnt):m_iCnt(cnt){

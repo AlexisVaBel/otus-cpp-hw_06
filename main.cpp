@@ -1,9 +1,7 @@
-#include <iostream>
-
 #include <string>
-#include <processor/bulkmonitor.h>
-#include <processor/consolecmdobserver.h>
-#include <processor/logcmdobserver.h>
+#include <observable/bulkmonitor.h>
+#include <observer/consolecmdobserver.h>
+#include <observer/logcmdobserver.h>
 
 #include <memory>
 
@@ -12,12 +10,8 @@ int main(int argc, char ** argv){
     int val = std::stoi(argv[1]);
 
     BulkMonitor monitor(val);
-
-    ConsoleCmdObserver *v1 = new ConsoleCmdObserver();
-    LogCmdObserver     *v2 = new LogCmdObserver();
-
-    monitor.registerObserver(v1);
-    monitor.registerObserver(v2);
+    monitor.registerObserver(std::make_shared<ConsoleCmdObserver>());
+    monitor.registerObserver(std::make_shared<LogCmdObserver>());
     monitor.procsCmd();
 
     return 0;

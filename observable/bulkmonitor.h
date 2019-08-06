@@ -2,8 +2,8 @@
 #define BULKMONITOR_H
 
 #include <iostream>
-#include "../observer/bulkobserver.h"
-#include "icmdobserver.h"
+#include "bulkobserver.h"
+#include "../observer/icmdobserver.h"
 #include "cmdacceptor.h"
 
 
