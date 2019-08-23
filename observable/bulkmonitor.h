@@ -16,13 +16,16 @@ public:
     }
 
     void procsCmd(){
-        for(std::string line; std::getline(std::cin, line);){
+
+        for(std::string line; std::getline(std::cin, line);){            
             if(m_cmdAcceptor.procsCmd(line)) {
+                notifyObservers(&ICmdObserver::onNewCmd,m_cmdAcceptor.getFirstCmdArrived());
                 notifyObservers(&ICmdObserver::onCmdReceived,m_cmdAcceptor.getCmds());
                 m_cmdAcceptor.clearProcessd();
-            }
+            } // cmd begin detected
         }
         // on out - need to remove all;
+        notifyObservers(&ICmdObserver::onNewCmd,m_cmdAcceptor.getFirstCmdArrived());
         notifyObservers(&ICmdObserver::onCmdReceived,m_cmdAcceptor.getCmds());
     }
 
